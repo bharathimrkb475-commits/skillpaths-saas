@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course - SkillPath</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="topbar">
+  <div class="flex gap-12">
+    <a href="dashboard.html" class="btn btn-ghost btn-sm">← Dashboard</a>
+  </div>
+  <button class="btn btn-ghost btn-sm" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
+</div>
+
+<div class="container mt-24" style="padding-bottom:60px;">
+
+  <!-- COURSE HEADER -->
+  <div class="card mb-24" id="courseHeader"></div>
+
+  <!-- LEVEL STEPPER -->
+  <div class="card mb-24">
+    <div class="level-path" id="levelStepper"></div>
+    <div class="flex gap-12" id="levelTabs"></div>
+  </div>
+
+  <!-- DYNAMIC LEVEL CONTENT -->
+  <div id="levelPanel"></div>
+
+</div>
+
+<!-- DEMO SUBSCRIPTION / PAYMENT MODAL -->
+<div class="modal-overlay hidden" id="subModal">
+  <div class="modal-box">
+    <h3 class="mb-8">Demo Payment</h3>
+    <p class="muted mb-16">This is a frontend demonstration. No real payment will be processed.</p>
+    <div class="grid-2 mb-16">
+      <div class="card" style="cursor:pointer;" onclick="selectPlan('Monthly')" id="planMonthly">
+        <strong>Monthly</strong><div class="mt-8" style="font-size:20px; font-weight:800;">₹499</div><span class="muted">/ Month</span>
+      </div>
+      <div class="card" style="cursor:pointer;" onclick="selectPlan('Yearly')" id="planYearly">
+        <strong>Yearly</strong><div class="mt-8" style="font-size:20px; font-weight:800;">₹4,999</div><span class="muted">/ Year</span>
+      </div>
+    </div>
+    <div class="flex gap-12">
+      <button class="btn btn-primary" onclick="confirmSubscription()">Confirm Demo Subscription</button>
+      <button class="btn btn-ghost" onclick="closeSubModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/courses-data.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/course.js"></script>
+</body>
+</html>

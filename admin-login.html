@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login - SkillPath</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="brand">
+      <div class="brand-mark" style="background:linear-gradient(135deg,#1B2130,#3457D5);">A</div>
+      <div class="brand-name">SkillPath Admin</div>
+    </div>
+    <p class="auth-subtitle">Administrator access only. This is a separate login from the user login.</p>
+
+    <form id="adminLoginForm" onsubmit="adminLogin(event)">
+      <div class="form-group">
+        <label for="adminEmail">Admin Email</label>
+        <input type="email" id="adminEmail" placeholder="admin@skillpath.com" required>
+      </div>
+      <div class="form-group">
+        <label for="adminPassword">Admin Password</label>
+        <input type="password" id="adminPassword" placeholder="Enter admin password" required>
+      </div>
+      <div class="error-text" id="adminError"></div>
+      <button type="submit" class="btn btn-primary btn-block">Admin Login</button>
+    </form>
+
+    <p class="muted mt-16" style="font-size:12.5px; text-align:center;">
+      Demo credentials — Email: admin@skillpath.com &nbsp;|&nbsp; Password: admin123
+    </p>
+
+    <hr class="divider-line">
+    <div class="auth-footer-links">
+      Not an admin? <a href="login.html">Go to User Login</a>
+    </div>
+  </div>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

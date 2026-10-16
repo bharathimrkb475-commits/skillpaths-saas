@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - SkillPath</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <!-- ===================== ADMIN SIDEBAR ===================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-mark" style="background:linear-gradient(135deg,#1B2130,#3457D5);">A</div>
+      <div class="brand-name">Admin Panel</div>
+    </div>
+    <nav>
+      <a class="nav-item" data-tab="dashboard" onclick="showAdminTab('dashboard')">🏠 Dashboard</a>
+      <a class="nav-item" data-tab="users" onclick="showAdminTab('users')">👥 Users</a>
+      <a class="nav-item" data-tab="courses" onclick="showAdminTab('courses')">📚 Courses</a>
+      <a class="nav-item" data-tab="enrollments" onclick="showAdminTab('enrollments')">📝 Enrollments</a>
+      <a class="nav-item" data-tab="progress" onclick="showAdminTab('progress')">📈 Progress</a>
+      <a class="nav-item" data-tab="assessments" onclick="showAdminTab('assessments')">🎯 Assessments</a>
+      <a class="nav-item" data-tab="subscriptions" onclick="showAdminTab('subscriptions')">💳 Subscriptions</a>
+      <a class="nav-item" data-tab="certificates" onclick="showAdminTab('certificates')">🎓 Certificates</a>
+      <a class="nav-item" data-tab="feedback" onclick="showAdminTab('feedback')">💬 Feedback</a>
+      <a class="nav-item" data-tab="reports" onclick="showAdminTab('reports')">📮 Reports</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="nav-item" onclick="adminLogout()">🚪 Logout</a>
+    </div>
+  </aside>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <div class="main-content">
+    <div class="topbar">
+      <div class="flex gap-12">
+        <button class="menu-btn" onclick="openSidebar()">☰</button>
+        <h3 id="topbarTitle">Admin Dashboard</h3>
+      </div>
+      <button class="btn btn-ghost btn-sm" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
+    </div>
+
+    <div class="page-body">
+
+      <!-- ============ DASHBOARD ============ -->
+      <section class="tab-section active" id="tab-dashboard">
+        <h2>Welcome, Admin</h2>
+        <p class="muted mb-24">Live overview calculated from stored learner activity.</p>
+        <div class="stat-grid" id="adminStatGrid"></div>
+        <h3 class="mt-32 mb-16">Recently Active Users</h3>
+        <div class="card" id="recentlyActiveList" style="padding:0;"></div>
+      </section>
+
+      <!-- ============ USERS ============ -->
+      <section class="tab-section" id="tab-users">
+        <h2 class="mb-16">Users</h2>
+        <div class="table-wrap card">
+          <table>
+            <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Category</th><th>Status</th><th></th></tr></thead>
+            <tbody id="usersTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ COURSES ============ -->
+      <section class="tab-section" id="tab-courses">
+        <h2 class="mb-16">Courses</h2>
+        <div class="grid-3" id="adminCoursesGrid"></div>
+      </section>
+
+      <!-- ============ ENROLLMENTS ============ -->
+      <section class="tab-section" id="tab-enrollments">
+        <h2 class="mb-16">Enrollments</h2>
+        <div class="table-wrap card">
+          <table>
+            <thead><tr><th>User</th><th>Course</th><th>Category</th><th>Level</th><th>Progress</th><th>Status</th></tr></thead>
+            <tbody id="enrollmentsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ PROGRESS ============ -->
+      <section class="tab-section" id="tab-progress">
+        <h2 class="mb-16">Progress Monitoring</h2>
+        <div id="adminProgressList"></div>
+      </section>
+
+      <!-- ============ ASSESSMENTS ============ -->
+      <section class="tab-section" id="tab-assessments">
+        <h2 class="mb-16">Assessments</h2>
+        <div class="table-wrap card">
+          <table>
+            <thead><tr><th>User</th><th>Course</th><th>Level</th><th>Score</th><th>%</th><th>Status</th><th>Date</th></tr></thead>
+            <tbody id="adminAssessmentsBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ SUBSCRIPTIONS ============ -->
+      <section class="tab-section" id="tab-subscriptions">
+        <h2 class="mb-16">Subscriptions</h2>
+        <p class="muted mb-16">These are demo subscriptions only. No real payment is processed.</p>
+        <div class="table-wrap card">
+          <table>
+            <thead><tr><th>User</th><th>Course</th><th>Level</th><th>Plan</th><th>Status</th></tr></thead>
+            <tbody id="adminSubscriptionsBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ CERTIFICATES ============ -->
+      <section class="tab-section" id="tab-certificates">
+        <h2 class="mb-16">Certificates</h2>
+        <div class="table-wrap card">
+          <table>
+            <thead><tr><th>User</th><th>Course</th><th>Certificate ID</th><th>Date</th><th></th></tr></thead>
+            <tbody id="adminCertificatesBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ FEEDBACK ============ -->
+      <section class="tab-section" id="tab-feedback">
+        <h2 class="mb-16">Feedback</h2>
+        <div id="adminFeedbackList"></div>
+      </section>
+
+      <!-- ============ REPORTS ============ -->
+      <section class="tab-section" id="tab-reports">
+        <h2 class="mb-16">Reports</h2>
+        <div class="table-wrap card">
+          <table>
+            <thead><tr><th>User</th><th>Email</th><th>Category</th><th>Subject</th><th>Date</th><th>Status</th><th></th></tr></thead>
+            <tbody id="adminReportsBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- USER DETAILS MODAL -->
+<div class="modal-overlay hidden" id="userDetailsModal">
+  <div class="modal-box" id="userDetailsContent" style="max-width:680px;"></div>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/courses-data.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

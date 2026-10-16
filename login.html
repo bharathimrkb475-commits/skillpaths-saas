@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - SkillPath</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="brand">
+      <div class="brand-mark">SP</div>
+      <div class="brand-name">SkillPath</div>
+    </div>
+    <p class="auth-subtitle">Welcome back. Login to continue learning.</p>
+
+    <form id="loginForm" onsubmit="loginUser(event)">
+      <div class="form-group">
+        <label for="loginId">Email / User ID</label>
+        <input type="text" id="loginId" placeholder="you@example.com or SP12345" required>
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Your password" required>
+      </div>
+      <div class="error-text" id="loginError"></div>
+      <button type="submit" class="btn btn-primary btn-block">Login</button>
+    </form>
+
+    <div class="flex-between mt-16">
+      <a href="register.html" class="btn btn-outline btn-sm">Create Account</a>
+      <a href="#" class="btn btn-ghost btn-sm" onclick="document.getElementById('forgotModal').style.display='flex'">Forgot Password</a>
+    </div>
+
+    <hr class="divider-line">
+    <div class="auth-footer-links">
+      Are you an administrator? <a href="admin-login.html">Admin Login</a>
+    </div>
+  </div>
+</div>
+
+<!-- FORGOT PASSWORD MODAL (frontend demo only) -->
+<div class="modal-overlay" id="forgotModal" style="display:none;">
+  <div class="modal-box">
+    <h3 class="mb-16">Forgot Password</h3>
+    <form onsubmit="forgotPassword(event)">
+      <div class="form-group">
+        <label for="forgotEmail">Enter your registered email</label>
+        <input type="email" id="forgotEmail" required>
+      </div>
+      <div id="forgotMessage" class="mb-16" style="font-size:14px;"></div>
+      <div class="flex gap-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-ghost" onclick="document.getElementById('forgotModal').style.display='none'">Close</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

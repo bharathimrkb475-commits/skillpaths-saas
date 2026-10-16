@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificate - SkillPath</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="topbar no-print">
+  <a href="dashboard.html" class="btn btn-ghost btn-sm">← Dashboard</a>
+  <button class="btn btn-ghost btn-sm" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
+</div>
+
+<div class="container mt-32" style="padding-bottom:60px;">
+  <div id="certificateArea" class="certificate">
+    <div style="font-family:var(--font-display); font-weight:800; font-size:14px; letter-spacing:3px; color:var(--primary);">SKILLPATH</div>
+    <div class="muted" style="font-size:12px; letter-spacing:2px;">CAREER LEARNING PLATFORM</div>
+    <h2 class="mt-24" style="font-size:15px; letter-spacing:2px; color:var(--text-muted); font-weight:700;">CERTIFICATE OF COMPLETION</h2>
+    <p class="mt-16 muted">This is to certify that</p>
+    <div class="cert-name" id="certStudentName">-</div>
+    <p class="muted">has successfully completed</p>
+    <div class="cert-course" id="certCourseName">-</div>
+    <p class="muted" id="certCategory">-</p>
+    <p class="muted mt-16">Completion Date: <strong id="certDate">-</strong></p>
+    <div class="cert-id">Certificate ID: <span id="certIdText">-</span></div>
+
+    <div class="signature-row">
+      <div><div class="sig-line"></div><div class="muted" style="font-size:13px;">Student Signature</div></div>
+      <div><div class="sig-line"></div><div class="muted" style="font-size:13px;">SkillPath, Career Learning Platform</div></div>
+    </div>
+  </div>
+
+  <div class="flex gap-12 mt-24 text-center no-print" style="justify-content:center;">
+    <button class="btn btn-primary" onclick="downloadCertificate()">Download Certificate</button>
+    <button class="btn btn-outline" onclick="printCertificate()">Print Certificate</button>
+  </div>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/theme.js"></script>
+<script>
+  // Load the certificate matching the certId in the URL.
+  const params = new URLSearchParams(window.location.search);
+  const certId = params.get("certId");
+  const cert = dbGetArray(DB_KEYS.CERTIFICATES).find((c) => c.certId === certId);
+
+  if (cert) {
+    document.getElementById("certStudentName").textContent = cert.userName;
+    document.getElementById("certCourseName").textContent = cert.courseName;
+    document.getElementById("certCategory").textContent = "Category: " + cert.category;
+    document.getElementById("certDate").textContent = formatDate(cert.date);
+    document.getElementById("certIdText").textContent = cert.certId;
+  } else {
+    document.getElementById("certificateArea").innerHTML = "<p>Certificate not found.</p>";
+  }
+
+  // Print uses the browser's native print dialog (print.css rules hide everything else).
+  function printCertificate() { window.print(); }
+
+  // "Download" as a simple HTML file the user can open/print/save as PDF from their browser.
+  function downloadCertificate() {
+    const html = "<html><head><title>Certificate</title><link rel='stylesheet' href='css/style.css'></head><body style='padding:40px;'>" + document.getElementById("certificateArea").outerHTML + "</body></html>";
+    const blob = new Blob([html], { type: "text/html" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = (cert ? cert.courseName.replace(/\s+/g, "_") : "certificate") + "_Certificate.html";
+    link.click();
+  }
+</script>
+</body>
+</html>
